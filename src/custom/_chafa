@@ -1,0 +1,51 @@
+#compdef chafa
+
+# zsh completions for 'chafa'
+# automatically generated with http://github.com/RobSis/zsh-completion-generator
+local arguments
+
+arguments=(
+  {-h,--help}'[show help.]'
+  '--version[show version.]'
+  {-v,--verbose}'[be verbose.]'
+  {-f,--format}'[set output format; one of \[iterm, kitty, sixels]'
+  {-O,--optimize}'[compress the output by using control sequences]'
+  '--relative[use relative cursor positioning \[on, off\]. When on]'
+  '--passthrough[graphics protocol passthrough \[auto, none, screen]'
+  '--polite[polite mode \[on, off\]. Inhibits escape sequences that may]'
+  '--align[horizontal and vertical alignment (e.g. "top,left").]'
+  '--clear[clear screen before processing each file.]'
+  '--exact-size[try to match the inputs size exactly \[auto, on, off\].]'
+  '--fit-width[fit images to views width, possibly exceeding its height.]'
+  '--font-ratio[/H  Target fonts width/height ratio. Can be specified as]'
+  '--margin-bottom[when terminal size is detected, reserve at least NUM]'
+  '--margin-right[when terminal size is detected, reserve at least NUM]'
+  '--scale[scale image, respecting views dimensions. 1.0 approximates]'
+  {-s,--size}'[set maximum image dimensions in columns and rows. By]'
+  '--stretch[stretch image to fit output dimensions; ignore aspect.]'
+  '--view-size[set the view size in columns and rows. By default this]'
+  '--animate[whether to allow animation \[on, off\]. Defaults to on.]'
+  {-d,--duration}'[how long to show each file. If showing a single file]'
+  '--speed[animation speed. Either a unitless multiplier, or a real]'
+  '--watch[watch a single input file, redisplaying it whenever its]'
+  '--bg[background color of display (color name or hex).]'
+  {-c,--colors}'[set output color mode; one of \[none, 2, 8, 16/8, 16, 240]'
+  '--color-extractor[method for extracting color from an area]'
+  '--color-space[color space used for quantization; one of \[rgb, din99d\].]'
+  '--dither[set output dither mode; one of \[none, ordered]'
+  '--dither-grain[set dimensions of dither grains in 1/8ths of a]'
+  '--dither-intensity[multiplier for dither intensity \[0.0 - inf\].]'
+  '--fg[foreground color of display (color name or hex).]'
+  '--invert[swaps --fg and --bg. Useful with light terminal background.]'
+  {-p,--preprocess}'[image preprocessing \[on, off\]. Defaults to on with 16]'
+  {-t,--threshold}'[lower threshold for full transparency \[0.0 - 1.0\].]'
+  '--threads[maximum number of CPU threads to use. If left unspecified]'
+  {-w,--work}'[how hard to work in terms of CPU and memory \[1-9\]. 1 is the]'
+  '--fg-only[leave the background color untouched. This produces]'
+  '--fill[specify character symbols to use for fill/gradients.]'
+  '--glyph-file[load glyph information from FILE, which can be any]'
+  '--symbols[specify character symbols to employ in final output.]'
+  '*:filename:_files'
+)
+
+_arguments -s $arguments

@@ -26,7 +26,7 @@ arguments=(
   '--no-hscroll[disable horizontal scroll]'
   '--hscroll-off[number of screen columns to keep to the right of the]'
   '--filepath-word[make word-wise movements respect path separators]'
-  '--jump-labels[label characters for jump and jump-accept]'
+  '--jump-labels[label characters for jump mode]'
   '--height[~\]HEIGHT\[%\]  Display fzf window below the cursor with the given]'
   '--min-height[minimum height when --height is given in percent]'
   '--layout[choose layout: \[default|reverse|reverse-list\]]'
@@ -68,6 +68,12 @@ arguments=(
   '--sync[synchronous search for multi-staged filtering]'
   '--listen[start HTTP server to receive actions (POST /)]'
   '--version[display version information and exit]'
+  '--walker[\[file\]\[,dir\]\[,follow\]\[,hidden\] (default: file,follow,hidden)]'
+  '--walker-root[root directory from which to start walker (default: .)]'
+  '--walker-skip[comma-separated list of directory names to skip]'
+  '--bash[print script to set up Bash shell integration]'
+  '--zsh[print script to set up Zsh shell integration]'
+  '--fish[print script to set up Fish shell integration]'
   '*:filename:_files'
 )
 

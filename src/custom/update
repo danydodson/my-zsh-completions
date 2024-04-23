@@ -11,7 +11,7 @@ cd "${_custom_dir}"
 [ -x "$(command -v mdbook)" ] && mdbook completions zsh > _mdbook
 [ -x "$(command -v hugo)" ] && hugo completion zsh > _hugo
 [ -x "$(command -v rg)" ] && rg --generate complete-zsh > _rg
-[ -x "$(command -v pip)" ] && pip completion --zsh > pip.plugin.zsh
+# [ -x "$(command -v pip)" ] && pip completion --zsh > pip.plugin.zsh
 [ -x "$(command -v npm)" ] && npm completion > npm.plugin.zsh
 [ -x "$(command -v deno)" ] && deno completions zsh > _deno
 [ -x "$(command -v gh)" ] && gh completion zsh > _gh
@@ -19,7 +19,7 @@ cd "${_custom_dir}"
 [ -x "$(command -v rustup)" ] && rustup completions zsh cargo > _cargo
 [ -x "$(command -v cargo-fmt)" ] && _genhelp cargo-fmt
 [ -x "$(command -v cargo-clippy)" ] && _genhelp cargo-clippy
-[ -x "$(command -v rust-analyzer)" ] && _genhelp rust-analyzer
+# [ -x "$(command -v rust-analyzer)" ] && _genhelp rust-analyzer
 [ -x "$(command -v rust-gdb)" ] && [ -x "$(command -v gdb)" ] && _genhelp rust-gdb
 [ -x "$(command -v rust-lldb)" ] && [ -x "$(command -v lldb)" ] && _genhelp rust-lldb
 [ -x "$(command -v rustc)" ] && _genhelp rustc
