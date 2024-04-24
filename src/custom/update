@@ -11,7 +11,6 @@ cd "${_custom_dir}"
 [ -x "$(command -v rustup)" ] && rustup completions zsh cargo > _cargo
 [ -x "$(command -v cargo-fmt)" ] && _genhelp cargo-fmt
 [ -x "$(command -v cargo-clippy)" ] && _genhelp cargo-clippy
-[ -x "$(command -v chafa)" ] && chafa completions zsh > _chafe
 [ -x "$(command -v deno)" ] && deno completions zsh > _deno
 [ -x "$(command -v fzf)" ] && _genhelp fzf
 [ -x "$(command -v gh)" ] && gh completion zsh > _gh
