@@ -9,8 +9,8 @@ _genhelp() {
 cd "${_custom_dir}"
 [ -x "$(command -v axel)" ] && _genhelp axel
 [ -x "$(command -v rustup)" ] && rustup completions zsh cargo > _cargo
-[ -x "$(command -v cargo-fmt)" ] && _genhelp cargo-fmt
 [ -x "$(command -v cargo-clippy)" ] && _genhelp cargo-clippy
+[ -x "$(command -v cargo-fmt)" ] && _genhelp cargo-fmt
 [ -x "$(command -v deno)" ] && deno completions zsh > _deno
 [ -x "$(command -v fzf)" ] && _genhelp fzf
 [ -x "$(command -v gh)" ] && gh completion zsh > _gh
@@ -27,7 +27,7 @@ cd "${_custom_dir}"
 [ -x "$(command -v rustc)" ] && _genhelp rustc
 [ -x "$(command -v rustup)" ] && rustup completions zsh rustup > _rustup
 [ -x "$(command -v yt-dlp)" ] && _genhelp yt-dlp
+curl -L -o _bun https://github.com/oven-sh/bun/raw/main/completions/bun.zsh
 curl -LO https://github.com/docker/cli/raw/master/contrib/completion/zsh/_docker
 curl -LO https://github.com/sharkdp/fd/raw/master/contrib/completion/_fd
 curl -L -o _tldr https://github.com/dbrgn/tealdeer/raw/main/completion/zsh_tealdeer
-curl -L -o _bun https://github.com/oven-sh/bun/raw/main/completions/bun.zsh

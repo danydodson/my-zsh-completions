@@ -7,8 +7,3 @@
 [submodule "src/custom/genhelp"]
 	path = src/custom/genhelp
 	url = https://github.com/RobSis/zsh-completion-generator
-[submodule "src/zsh-yarn-completions"]
-	path = src/zsh-yarn-completions
-	url = https://github.com/chrisands/zsh-yarn-completions.git
-
-	
