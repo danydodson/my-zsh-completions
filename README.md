@@ -4,10 +4,6 @@ This project is my personal collection of zsh completion definitions, currently 
 
 - [zsh-users/zsh-completions](https://github.com/zsh-users/zsh-completions)
 - [zchee/zsh-completions](https://github.com/zchee/zsh-completions)
-- [gradle/gradle-completion](https://github.com/gradle/gradle-completion)
-- [esc/conda-zsh-completion](https://github.com/esc/conda-zsh-completion)
-- [spwhitt/nix-zsh-completions](https://github.com/spwhitt/nix-zsh-completions)
-- [chrisands/zsh-yarn-completions](https://github.com/chrisands/zsh-yarn-completions.git)
 - Some [custom](https://github.com/danydodson/my-zsh-completions/tree/master/src/custom) completion definitions.
 
 ## Installation
@@ -35,4 +31,4 @@ zinit light danydodson/my-zsh-completions
 
 See each submodule for detailed license information.
 
-Other code goes to [MIT License](./LICENSE).
+Other code goes to [MIT License](./license).

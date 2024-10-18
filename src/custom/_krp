@@ -1,0 +1,7 @@
+#compdef krp
+
+_arguments \
+    '--repeat-rate[Set the key repeat rate]:' \
+    '--delay-until-repeat[Set the delay until repeat]:' \
+    '--version[Show the version]:'
+

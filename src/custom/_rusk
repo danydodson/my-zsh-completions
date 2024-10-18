@@ -1,0 +1,60 @@
+#compdef rusk
+
+zstyle ':completion:*:*:rusk:*' verbose yes
+zstyle ':completion:*:*:rusk:*:descriptions' format '%U%B%d%b%u'
+zstyle ':completion:*:*:rusk:*' group-name ''
+
+_rusk_filters() {
+    local -a reply
+    local word=$'[^\0]#\0'
+
+    _regex_words default 'Dates' \
+    'now:Now' \
+    'eod:End of day' \
+    'tod*ay:Today' \
+    'yes*terday:Yesterday' \
+    'tom*orrow:Tomorrow'
+    local task_dates=("$reply[@]")
+
+
+    local -a _task_projects
+    _task_projects+=($(rusk _cmd get projects)) 
+    _regex_words default 'Project names' "${_task_projects[@]}"
+    local task_projects=( "$reply[@]" )
+
+    local -a _task_statuses
+    _task_statuses+=(pending completed deleted) 
+    _regex_words default 'Task statuses' "${_task_statuses[@]}"
+    local task_status=( "$reply[@]" )
+
+    local -a _task_tags_name
+    _task_tags_name+=($(rusk _cmd get tags))
+    _regex_words default 'Task tags' "${_task_tags_name[@]}"
+    local task_tags_name=( "$reply[@]" )
+
+    local -a _task_tags
+    _task_tags+=(
+        '+:Include tag:$task_tags_name'
+        '-:Exclude tag:$task_tags_name'
+    ) 
+    _regex_words -t '' default 'Tag operator' "${_task_tags[@]}"
+    local task_tags=( "$reply[@]" )
+
+    local _task_filter=(
+        'proj*ect:Project:$task_projects'
+        'st*atus:Task status:$task_status'
+        'created.after:Starts after:$task_dates'
+        'created.before:Starts before:$task_dates'
+        'end.before:Completed before:$task_dates'
+        'end.after:Completed after:$task_dates'
+    )
+    _regex_words -t ':' default 'Filters' "${_task_filter[@]}"
+    local task_filter=( "$reply[@]" )
+
+    _regex_arguments _rusk /$'[^\0]##\0'/ \( \
+        "${task_filter[@]}" \| "${task_tags[@]}" \
+    \)
+    _rusk "$@"
+}
+
+_rusk_filters "$@"

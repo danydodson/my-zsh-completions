@@ -1,9 +1,9 @@
-#compdef hugo
-compdef _hugo hugo
+#compdef fly
+compdef _fly fly
 
-# zsh completion for hugo                                 -*- shell-script -*-
+# zsh completion for fly                                  -*- shell-script -*-
 
-__hugo_debug()
+__fly_debug()
 {
     local file="$BASH_COMP_DEBUG_FILE"
     if [[ -n ${file} ]]; then
@@ -11,7 +11,7 @@ __hugo_debug()
     fi
 }
 
-_hugo()
+_fly()
 {
     local shellCompDirectiveError=1
     local shellCompDirectiveNoSpace=2
@@ -23,21 +23,21 @@ _hugo()
     local lastParam lastChar flagPrefix requestComp out directive comp lastComp noSpace keepOrder
     local -a completions
 
-    __hugo_debug "\n========= starting completion logic =========="
-    __hugo_debug "CURRENT: ${CURRENT}, words[*]: ${words[*]}"
+    __fly_debug "\n========= starting completion logic =========="
+    __fly_debug "CURRENT: ${CURRENT}, words[*]: ${words[*]}"
 
     # The user could have moved the cursor backwards on the command-line.
     # We need to trigger completion from the $CURRENT location, so we need
     # to truncate the command-line ($words) up to the $CURRENT location.
     # (We cannot use $CURSOR as its value does not work when a command is an alias.)
     words=("${=words[1,CURRENT]}")
-    __hugo_debug "Truncated words[*]: ${words[*]},"
+    __fly_debug "Truncated words[*]: ${words[*]},"
 
     lastParam=${words[-1]}
     lastChar=${lastParam[-1]}
-    __hugo_debug "lastParam: ${lastParam}, lastChar: ${lastChar}"
+    __fly_debug "lastParam: ${lastParam}, lastChar: ${lastChar}"
 
-    # For zsh, when completing a flag with an = (e.g., hugo -n=<TAB>)
+    # For zsh, when completing a flag with an = (e.g., fly -n=<TAB>)
     # completions must be prefixed with the flag
     setopt local_options BASH_REMATCH
     if [[ "${lastParam}" =~ '-.*=' ]]; then
@@ -50,22 +50,22 @@ _hugo()
     if [ "${lastChar}" = "" ]; then
         # If the last parameter is complete (there is a space following it)
         # We add an extra empty parameter so we can indicate this to the go completion code.
-        __hugo_debug "Adding extra empty parameter"
+        __fly_debug "Adding extra empty parameter"
         requestComp="${requestComp} \"\""
     fi
 
-    __hugo_debug "About to call: eval ${requestComp}"
+    __fly_debug "About to call: eval ${requestComp}"
 
     # Use eval to handle any environment variables and such
     out=$(eval ${requestComp} 2>/dev/null)
-    __hugo_debug "completion output: ${out}"
+    __fly_debug "completion output: ${out}"
 
     # Extract the directive integer following a : from the last line
     local lastLine
     while IFS='\n' read -r line; do
         lastLine=${line}
     done < <(printf "%s\n" "${out[@]}")
-    __hugo_debug "last line: ${lastLine}"
+    __fly_debug "last line: ${lastLine}"
 
     if [ "${lastLine[1]}" = : ]; then
         directive=${lastLine[2,-1]}
@@ -75,16 +75,16 @@ _hugo()
         out=${out[1,-$suffix]}
     else
         # There is no directive specified.  Leave $out as is.
-        __hugo_debug "No directive found.  Setting do default"
+        __fly_debug "No directive found.  Setting do default"
         directive=0
     fi
 
-    __hugo_debug "directive: ${directive}"
-    __hugo_debug "completions: ${out}"
-    __hugo_debug "flagPrefix: ${flagPrefix}"
+    __fly_debug "directive: ${directive}"
+    __fly_debug "completions: ${out}"
+    __fly_debug "flagPrefix: ${flagPrefix}"
 
     if [ $((directive & shellCompDirectiveError)) -ne 0 ]; then
-        __hugo_debug "Completion received error. Ignoring completions."
+        __fly_debug "Completion received error. Ignoring completions."
         return
     fi
 
@@ -95,11 +95,11 @@ _hugo()
     while IFS='\n' read -r comp; do
         # Check if this is an activeHelp statement (i.e., prefixed with $activeHelpMarker)
         if [ "${comp[1,$endIndex]}" = "$activeHelpMarker" ];then
-            __hugo_debug "ActiveHelp found: $comp"
+            __fly_debug "ActiveHelp found: $comp"
             comp="${comp[$startIndex,-1]}"
             if [ -n "$comp" ]; then
                 compadd -x "${comp}"
-                __hugo_debug "ActiveHelp will need delimiter"
+                __fly_debug "ActiveHelp will need delimiter"
                 hasActiveHelp=1
             fi
 
@@ -116,7 +116,7 @@ _hugo()
             local tab="$(printf '\t')"
             comp=${comp//$tab/:}
 
-            __hugo_debug "Adding completion: ${comp}"
+            __fly_debug "Adding completion: ${comp}"
             completions+=${comp}
             lastComp=$comp
         fi
@@ -127,19 +127,19 @@ _hugo()
     # - file completion will be performed (so there will be choices after the activeHelp)
     if [ $hasActiveHelp -eq 1 ]; then
         if [ ${#completions} -ne 0 ] || [ $((directive & shellCompDirectiveNoFileComp)) -eq 0 ]; then
-            __hugo_debug "Adding activeHelp delimiter"
+            __fly_debug "Adding activeHelp delimiter"
             compadd -x "--"
             hasActiveHelp=0
         fi
     fi
 
     if [ $((directive & shellCompDirectiveNoSpace)) -ne 0 ]; then
-        __hugo_debug "Activating nospace."
+        __fly_debug "Activating nospace."
         noSpace="-S ''"
     fi
 
     if [ $((directive & shellCompDirectiveKeepOrder)) -ne 0 ]; then
-        __hugo_debug "Activating keep order."
+        __fly_debug "Activating keep order."
         keepOrder="-V"
     fi
 
@@ -156,17 +156,17 @@ _hugo()
         done
         filteringCmd+=" ${flagPrefix}"
 
-        __hugo_debug "File filtering command: $filteringCmd"
+        __fly_debug "File filtering command: $filteringCmd"
         _arguments '*:filename:'"$filteringCmd"
     elif [ $((directive & shellCompDirectiveFilterDirs)) -ne 0 ]; then
         # File completion for directories only
         local subdir
         subdir="${completions[1]}"
         if [ -n "$subdir" ]; then
-            __hugo_debug "Listing directories in $subdir"
+            __fly_debug "Listing directories in $subdir"
             pushd "${subdir}" >/dev/null 2>&1
         else
-            __hugo_debug "Listing directories in ."
+            __fly_debug "Listing directories in ."
         fi
 
         local result
@@ -177,17 +177,17 @@ _hugo()
         fi
         return $result
     else
-        __hugo_debug "Calling _describe"
+        __fly_debug "Calling _describe"
         if eval _describe $keepOrder "completions" completions $flagPrefix $noSpace; then
-            __hugo_debug "_describe found some completions"
+            __fly_debug "_describe found some completions"
 
             # Return the success of having called _describe
             return 0
         else
-            __hugo_debug "_describe did not find completions."
-            __hugo_debug "Checking if we should do file completion."
+            __fly_debug "_describe did not find completions."
+            __fly_debug "Checking if we should do file completion."
             if [ $((directive & shellCompDirectiveNoFileComp)) -ne 0 ]; then
-                __hugo_debug "deactivating file completion"
+                __fly_debug "deactivating file completion"
 
                 # We must return an error code here to let zsh know that there were no
                 # completions found by _describe; this is what will trigger other
@@ -196,7 +196,7 @@ _hugo()
                 return 1
             else
                 # Perform file completion
-                __hugo_debug "Activating file completion"
+                __fly_debug "Activating file completion"
 
                 # We must return the result of this command, so it must be the
                 # last command, or else we must store its result to return it.
@@ -207,6 +207,6 @@ _hugo()
 }
 
 # don't run the completion function when being source-ed or eval-ed
-if [ "$funcstack[1]" = "_hugo" ]; then
-    _hugo
+if [ "$funcstack[1]" = "_fly" ]; then
+    _fly
 fi
